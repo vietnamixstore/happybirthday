@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html,body{width:100%;height:100%;overflow:hidden}
+body{font-family:"Be Vietnam Pro",sans-serif;background:linear-gradient(135deg,#fff0f6,#ffe4ec 45%,#fff7dc);color:#402633}
+.screen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;visibility:hidden;transform:scale(.97);transition:.5s;overflow-y:auto}
+.screen.active{opacity:1;visibility:visible;transform:scale(1)}
+.card{width:min(920px,100%);max-height:94vh;overflow:auto;background:rgba(255,255,255,.8);backdrop-filter:blur(15px);border:1px solid #fff;border-radius:30px;padding:36px;text-align:center;box-shadow:0 20px 70px rgba(148,67,100,.18)}
+.script{font-family:Pacifico,cursive;color:#e65382}h1{font-size:clamp(36px,7vw,72px);line-height:1.1}h2{font-size:clamp(28px,5vw,46px);margin-bottom:12px}p{line-height:1.8}.sub{opacity:.75;margin:10px auto 25px;max-width:650px}
+.btn{border:0;border-radius:999px;padding:14px 26px;font:700 15px "Be Vietnam Pro";cursor:pointer;color:white;background:linear-gradient(135deg,#ef5b8c,#ff8d67);box-shadow:0 10px 25px rgba(239,91,140,.25);transition:.2s}.btn:hover{transform:translateY(-2px)}.btn.secondary{background:#fff;color:#d84f7d;border:1px solid #f4b4c8;box-shadow:none}.nav{display:flex;justify-content:center;gap:10px;margin-top:22px;flex-wrap:wrap}
+.gift-big{width:145px;height:125px;margin:10px auto 25px;position:relative;cursor:pointer;animation:float 2.5s ease-in-out infinite}.gift-box{position:absolute;left:12px;right:12px;bottom:0;height:82px;border-radius:10px;background:#ef5b8c}.gift-lid{position:absolute;left:0;right:0;top:26px;height:30px;border-radius:9px;background:#ff789e}.ribbon-v{position:absolute;width:24px;top:26px;bottom:0;left:50%;transform:translateX(-50%);background:#ffd166}.ribbon-h{position:absolute;left:0;right:0;top:31px;height:15px;background:#ffd166}.bow:before,.bow:after{content:"";position:absolute;width:43px;height:28px;top:0;background:#ffd166;border-radius:80% 20% 80% 20%}.bow:before{left:22px;transform:rotate(25deg)}.bow:after{right:22px;transform:scaleX(-1) rotate(25deg)}@keyframes float{50%{transform:translateY(-10px)}}
+.hero-cake{font-size:105px;margin:10px}.balloons{position:absolute;inset:0;pointer-events:none;overflow:hidden}.balloon{position:absolute;bottom:-120px;font-size:55px;animation:rise 9s linear infinite}@keyframes rise{to{transform:translateY(-115vh) rotate(15deg)}}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}.gallery img{width:100%;height:210px;object-fit:cover;border-radius:18px;border:4px solid white;box-shadow:0 8px 25px rgba(0,0,0,.08)}
+.letter{background:#fffdf8;text-align:left;padding:28px;border-radius:20px;min-height:270px;box-shadow:inset 0 0 0 1px #f4e7d5}.letter-page{display:none}.letter-page.active{display:block;animation:fade .35s}.letter p{margin:12px 0}@keyframes fade{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
+.gifts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:25px}.gift-item{background:#fff;border:2px solid #ffd1df;border-radius:22px;padding:20px;cursor:pointer;transition:.25s}.gift-item:hover{transform:translateY(-5px);box-shadow:0 12px 30px rgba(220,80,120,.13)}.gift-icon{font-size:58px}.gift-content{display:none;margin-top:12px;color:#8a3f59;font-weight:600}.gift-item.open .gift-content{display:block;animation:fade .3s}
+.count{font-size:100px;font-weight:800;color:#ed5b86;min-height:115px}.final{display:none;animation:finalIn .8s ease}.final.show{display:block}@keyframes finalIn{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}.final img{max-width:100%;max-height:42vh;object-fit:contain;border-radius:22px;margin:18px auto;box-shadow:0 15px 45px rgba(0,0,0,.15)}
+.confetti{position:fixed;width:9px;height:14px;top:-20px;z-index:99;animation:confettiFall linear forwards;pointer-events:none}@keyframes confettiFall{to{transform:translateY(110vh) rotate(720deg);opacity:.9}}
+.spark{position:fixed;pointer-events:none;font-size:22px;z-index:98;animation:spark 1.5s ease-out forwards}@keyframes spark{to{transform:translateY(-120px) scale(1.8);opacity:0}}
+.music{position:fixed;right:16px;top:16px;z-index:100;width:45px;height:45px;border:0;border-radius:50%;background:white;box-shadow:0 5px 20px rgba(0,0,0,.12);cursor:pointer;font-size:20px}.progress{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:90;font-size:12px;background:rgba(255,255,255,.7);padding:6px 12px;border-radius:20px}
+@media(max-width:650px){.gallery{grid-template-columns:1fr 1fr}.gallery img{height:150px}.gifts{grid-template-columns:1fr}.card{padding:25px 18px}}
+</style>
+</head>
+<body>
+<audio id="music" src="birthday.mp3" autoplay loop preload="auto"></audio>
+<button class="music" id="musicBtn">🔊</button><div class="progress" id="progress">1 / 6</div>
+
+<section class="screen active" id="s1"><div class="card">
+<div class="gift-big" onclick="go(2)"><div class="bow"></div><div class="gift-lid"></div><div class="gift-box"></div><div class="ribbon-v"></div><div class="ribbon-h"></div></div>
+<div class="script" style="font-size:28px">Một món quà nhỏ dành cho bạn...</div><h1>🎁</h1><p class="sub">Có một điều đặc biệt đang chờ bạn ở bên trong.<br>Nhấn vào món quà để mở nhé!</p><button class="btn" onclick="go(2)">MỞ QUÀ ✨</button>
+</div></section>
+
+<section class="screen" id="s2"><div class="balloons"><span class="balloon" style="left:5%">🎈</span><span class="balloon" style="left:25%;animation-delay:2s">🎈</span><span class="balloon" style="left:50%;animation-delay:4s">🎈</span><span class="balloon" style="left:75%;animation-delay:1s">🎈</span></div><div class="card">
+<div class="hero-cake">🎂</div><div class="script" style="font-size:30px">Happy Birthday</div><h1 id="nameTitle">TÊN NGƯỜI NHẬN ❤️</h1><p class="sub" id="ageText">Chúc mừng sinh nhật tuổi mới!</p><button class="btn" onclick="go(3);confetti(35)">TIẾP TỤC →</button>
+</div></section>
+
+<section class="screen" id="s3"><div class="card">
+<div class="script" style="font-size:28px">Những khoảnh khắc</div><h2>📸 Đã từng có những ngày thật đẹp</h2><p class="sub">Một vài khoảnh khắc đáng nhớ được giữ lại ở đây.</p>
+<div class="gallery"><img src="photo1.jpg"><img src="photo2.jpg"><img src="photo3.jpg"><img src="photo4.jpg"><img src="photo5.jpg"><img src="photo6.jpg"></div>
+<div class="nav"><button class="btn" onclick="go(4)">TIẾP TỤC →</button></div>
+</div></section>
+
+<section class="screen" id="s4"><div class="card">
+<div class="script" style="font-size:28px">Một chút điều muốn nói...</div><h2>💌 Bức thư sinh nhật</h2>
+<div class="letter">
+<div class="letter-page active"><p>Gửi <b id="letterName">bạn</b>,</p><p>Hôm nay là một ngày thật đặc biệt, vì đó là ngày một người đặc biệt xuất hiện trên thế giới này.</p><p>Chúc bạn có một sinh nhật thật vui, thật nhiều tiếng cười và thật nhiều điều bất ngờ.</p></div>
+<div class="letter-page"><p>Tuổi mới, mong rằng bạn sẽ có thật nhiều khoảnh khắc đáng nhớ.</p><p>Mong những điều bạn đang cố gắng sẽ dần trở thành hiện thực, những người bạn yêu thương luôn ở bên cạnh.</p><p>Và quan trọng nhất, hãy luôn là phiên bản khiến chính bạn cảm thấy tự hào.</p></div>
+<div class="letter-page"><p>Cuối cùng...</p><p>Không cần phải hoàn hảo. Không cần lúc nào cũng mạnh mẽ.</p><p>Chỉ cần mỗi ngày thức dậy, bạn vẫn có một lý do để mỉm cười là đã đủ rồi.</p><p><b>Chúc mừng sinh nhật! ❤️</b></p></div>
+</div>
+<div class="nav"><button class="btn secondary" onclick="letterPrev()">← Trước</button><span id="letterPage" style="padding:13px 5px">1 / 3</span><button class="btn" onclick="letterNext()">Tiếp →</button></div>
+<div class="nav"><button class="btn" onclick="go(5)">ĐẾN MÓN QUÀ TIẾP THEO 🎁</button></div>
+</div></section>
+
+<section class="screen" id="s5"><div class="card">
+<div class="script" style="font-size:28px">Còn vài món quà nữa...</div><h2>🎁 Mở từng hộp nhé!</h2><p class="sub">Bấm vào từng hộp để xem bên trong có gì.</p>
+<div class="gifts">
+<div class="gift-item" onclick="openGift(this)"><div class="gift-icon">🎁</div><b>Món quà số 1</b><div class="gift-content">✨ Mong bạn luôn có thật nhiều niềm vui mỗi ngày!</div></div>
+<div class="gift-item" onclick="openGift(this)"><div class="gift-icon">🎀</div><b>Món quà số 2</b><div class="gift-content">🌷 Chúc những điều tốt đẹp nhất sẽ tìm đến bạn.</div></div>
+<div class="gift-item" onclick="openGift(this)"><div class="gift-icon">💝</div><b>Món quà số 3</b><div class="gift-content">❤️ Một lời nhắc rằng bạn luôn là một người rất đặc biệt.</div></div>
+</div>
+<div class="nav"><button class="btn" onclick="go(6)">MÓN QUÀ CUỐI CÙNG → 🎉</button></div>
+</div></section>
+
+<section class="screen" id="s6"><div class="card">
+<div id="surpriseIntro"><div class="script" style="font-size:30px">Wait...</div><h2>Còn một điều cuối cùng</h2><p class="sub">Nhưng trước khi nhìn thấy nó...</p><button class="btn" onclick="startSurprise()">SẴN SÀNG CHƯA? 🎁</button></div>
+<div id="countdown" class="count" style="display:none"></div>
+<div class="final" id="final"><div class="script" style="font-size:34px">SURPRISE!!! 🎉</div><h1>🎂 HAPPY BIRTHDAY 🎂</h1><p class="sub" id="finalText">Chúc bạn một tuổi mới thật tuyệt vời! ❤️</p><img src="surprise.jpg" alt="Surprise"><p><b>Chúc cho mọi điều tốt đẹp nhất sẽ đến với bạn. ❤️</b></p><div class="nav"><button class="btn secondary" onclick="location.reload()">XEM LẠI ↻</button></div></div>
+</div></section>
+
+<script>
+const CONFIG={name:"TÊN NGƯỜI NHẬN",age:20};
+const screens=document.querySelectorAll(".screen"),progress=document.getElementById("progress");let current=1;
+function go(n){screens.forEach(s=>s.classList.remove("active"));document.getElementById("s"+n).classList.add("active");current=n;progress.textContent=n+" / 6";tryMusic()}
+document.getElementById("nameTitle").textContent=CONFIG.name;
+document.getElementById("letterName").textContent=CONFIG.name;
+document.getElementById("ageText").textContent=`Chúc mừng sinh nhật tuổi ${CONFIG.age}! Mong tuổi mới sẽ thật rực rỡ ✨`;
+document.getElementById("finalText").textContent=`Chúc ${CONFIG.name} một tuổi mới thật tuyệt vời, thật nhiều niềm vui và thật nhiều điều bất ngờ! ❤️`;
+const music=document.getElementById("music"),musicBtn=document.getElementById("musicBtn");
+function tryMusic(){music.play().then(()=>musicBtn.textContent="🔊").catch(()=>musicBtn.textContent="🔇")}
+window.addEventListener("load",tryMusic);["click","touchstart","keydown"].forEach(e=>document.addEventListener(e,tryMusic,{once:true}));
+musicBtn.onclick=()=>{if(music.paused){music.play();musicBtn.textContent="🔊"}else{music.pause();musicBtn.textContent="🔇"}};
+let letterIndex=0;const letterPages=document.querySelectorAll(".letter-page");
+function updateLetter(){letterPages.forEach((p,i)=>p.classList.toggle("active",i===letterIndex));document.getElementById("letterPage").textContent=(letterIndex+1)+" / "+letterPages.length}
+function letterNext(){if(letterIndex<letterPages.length-1)letterIndex++;updateLetter()}function letterPrev(){if(letterIndex>0)letterIndex--;updateLetter()}
+function openGift(el){el.classList.toggle("open");if(el.classList.contains("open"))confetti(10)}
+function confetti(amount=30){const symbols=["🎉","🎊","✨","💖","⭐"];for(let i=0;i<amount;i++){const c=document.createElement("div");c.className="confetti";c.textContent=symbols[Math.floor(Math.random()*symbols.length)];c.style.left=Math.random()*100+"vw";c.style.animationDuration=(2+Math.random()*3)+"s";c.style.fontSize=(12+Math.random()*18)+"px";document.body.appendChild(c);setTimeout(()=>c.remove(),5500)}}
+function startSurprise(){document.getElementById("surpriseIntro").style.display="none";const cd=document.getElementById("countdown");cd.style.display="block";const nums=["3","2","1"];let i=0;cd.textContent=nums[i];const timer=setInterval(()=>{i++;if(i<nums.length)cd.textContent=nums[i];else{clearInterval(timer);cd.style.display="none";document.getElementById("final").classList.add("show");confetti(120);}},1000)}
+</script>
+</body>
+</html>
